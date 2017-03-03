@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<title>Trivia Game!!</title>
+
+</head>
+
+<body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+
+<button id="start">Start</button>
+
+    <div id="wrapper">
+
+      <div id="display">00:05</div>
+
+    </div>
+
+
+
+<script type="text/javascript">
+
+
+
+	window.onload = function() {
+	  $("#start").click(countdownTimer.start);
+	};
+
+	var counter;
+
+	var countdownTimer = {
+		time: 5,
+
+		start: function(){
+			counter = setInterval(countdownTimer.countdown, 1000);
+		},
+
+		countdown: function(){
+			if(countdownTimer.time <= 0){
+				$("#display").html("00:00");
+				clearInterval(counter);	
+				alert("Time's up!");
+				return;
+			}			
+			countdownTimer.time--;
+			console.log("Current Time: " + countdownTimer.time);
+			var converted = countdownTimer.timeConverter(countdownTimer.time);
+			$("#display").html(converted);
+		},
+
+		timeConverter: function(t){
+			var minutes = Math.floor(t / 60);
+			var seconds = t - (minutes * 60);
+
+			if(seconds < 10){
+				seconds = "0" + seconds;
+			}
+
+			if(minutes === 0){
+				minutes = "00";
+			}
+
+			else if(minutes < 10){
+				minutes = "0" + minutes;
+			}
+
+			return minutes + ":" + seconds;
+
+		},
+	};
+	
+</script>
+</body>
+</html>
